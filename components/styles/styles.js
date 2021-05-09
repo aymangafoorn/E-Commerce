@@ -71,5 +71,11 @@ export const styles = StyleSheet.create({
     splashTitle:{
         fontSize: 30,
         fontWeight: '700'
+    },
+    card:{
+       borderWidth: 1,
+       marginVertical: 5,
+       padding:5,
+        
     }
 });

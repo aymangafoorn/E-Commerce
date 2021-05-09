@@ -63,12 +63,22 @@ const Home = ({ navigation }) => {
         }
     }
     const setCart = async (data) => {
+        console.log('dataget',data)
         let cartItem = []
+        let cartget
         try {
-            cartItem = await AsyncStorage.getItem('cartdata')
-            cartItem = JSON.parse(cartItem)
-
-            cartItem = [...cartItem, data]
+            cartget = await AsyncStorage.getItem('cartdata')
+            cartget = JSON.parse(cartget)
+            let x=0
+            if(cartget){
+                for ( x; x < cartget.length; x++ ) {
+                    cartItem.push(cartget[x])
+                  }
+                
+                cartItem.push(data)
+            }
+            
+            else cartItem =data
             await AsyncStorage.setItem('cartdata', JSON.stringify(cartItem))
             console.log('cartarray', cartItem)
         }
@@ -103,8 +113,10 @@ const Home = ({ navigation }) => {
                 {state.products ? state.products.data ?
                     state.products.data.map(data => {
                         return (
-                            <View>
-                                <Text>{data.attributes.title}</Text>
+                            <View style={styles.card}>
+                                <Text style={styles.sectionTitle}>{data.attributes.title}</Text>
+                                <Text style={styles.sectionDescription}>{data.attributes?data.attributes.price?data.attributes.price.formatted:'':''}</Text>
+                                <Button style={styles.button} title='Add to Cart' onPress={()=>setCart(data)}></Button>
                             </View>
                         )
 
