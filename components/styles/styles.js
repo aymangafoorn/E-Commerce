@@ -57,6 +57,7 @@ export const styles = StyleSheet.create({
     bg_blue: {
         backgroundColor: 'lightblue',
         paddingHorizontal: 24,
+        paddingTop:10,
     },
     Splash:{
         height: Dimensions.get("window").height,
@@ -77,5 +78,13 @@ export const styles = StyleSheet.create({
        marginVertical: 5,
        padding:5,
         
+    },
+    search_icon:{
+        backgroundColor: 'white',
+        height: 40,
+        width: 25,
+        display: 'flex',
+        alignItems:  'center',
+        justifyContent: 'center'
     }
 });

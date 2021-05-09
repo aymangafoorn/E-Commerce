@@ -11,6 +11,7 @@ import { styles } from '../components/styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import image from '../components/images/cartitem.png'
+import Card from '../components/Card'
 import {
     Input,
     Button,
@@ -63,22 +64,22 @@ const Home = ({ navigation }) => {
         }
     }
     const setCart = async (data) => {
-        console.log('dataget',data)
+        console.log('dataget', data)
         let cartItem = []
         let cartget
         try {
             cartget = await AsyncStorage.getItem('cartdata')
             cartget = JSON.parse(cartget)
-            let x=0
-            if(cartget){
-                for ( x; x < cartget.length; x++ ) {
+            let x = 0
+            if (cartget) {
+                for (x; x < cartget.length; x++) {
                     cartItem.push(cartget[x])
-                  }
-                
+                }
+
                 cartItem.push(data)
             }
-            
-            else cartItem =data
+
+            else cartItem = data
             await AsyncStorage.setItem('cartdata', JSON.stringify(cartItem))
             console.log('cartarray', cartItem)
         }
@@ -96,28 +97,29 @@ const Home = ({ navigation }) => {
         <View>
             <View style={styles.bg_blue}>
                 <View style={styles.row}>
-                    <Icon name='bars' size={20} />
-                    <Icon name='shopping-cart' size={25} onPress={() => navigation.navigate('Cart')} />
+                    <Icon name='bars' size={25} />
+                    <Icon name='shopping-cart' size={30} onPress={() => navigation.navigate('Cart')} />
                 </View>
-                <SearchBar leftIcon={
+                <Input leftIcon={
                     <Icon
+                        style={styles.search_icon}
                         name='search'
                         size={20}
                         color='black'
                         type='FontAwesome'
                     />}
-                    inputContainerStyle={styles.search}
-                    style={styles.search} value={search} placeholder='Search' onChangeText={setSearch} containerStyle='' />
+                    style={styles.search} value={search} placeholder='Search' onChangeText={setSearch} containerStyle=''
+                    underlineColorAndroid='rgba(0,0,0,0)' />
             </View>
-            <ScrollView style={styles.sectionContainer}>
+            <ScrollView style={{ ...styles.sectionContainer, }}>
                 {state.products ? state.products.data ?
                     state.products.data.map(data => {
                         return (
-                            <View style={styles.card}>
+                            <Card>
                                 <Text style={styles.sectionTitle}>{data.attributes.title}</Text>
-                                <Text style={styles.sectionDescription}>{data.attributes?data.attributes.price?data.attributes.price.formatted:'':''}</Text>
-                                <Button style={styles.button} title='Add to Cart' onPress={()=>setCart(data)}></Button>
-                            </View>
+                                <Text style={styles.sectionDescription}>{data.attributes ? data.attributes.price ? data.attributes.price.formatted : '' : ''}</Text>
+                                <Button style={styles.button} title='Add to Cart' onPress={() => setCart(data)}></Button>
+                            </Card>
                         )
 
                     })
@@ -127,3 +129,9 @@ const Home = ({ navigation }) => {
     )
 }
 export default Home;
+
+export const homestyle = StyleSheet.create({
+    scrolls:{
+        // backgroundColor: 'white'
+    }
+})

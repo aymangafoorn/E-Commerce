@@ -12,6 +12,7 @@ import {
   Button,
 } from 'react-native-elements';
 import { styles } from '../components/styles/styles'
+import Card from '../components/Card'
 
 const Cart = ({ navigation }) => {
   const [cart, setCart] = useState([])
@@ -36,10 +37,10 @@ const Cart = ({ navigation }) => {
       <Button type='outline' title='Empty Cart' onPress={() => empty()}></Button>
       {cart ? cart.map(data => {
         return (
-          <View style={styles.card}>
+          <Card>
             <Text style={styles.sectionTitle}>{data.attributes.title}</Text>
             <Text style={styles.sectionDescription}>{data.attributes ? data.attributes.price ? data.attributes.price.formatted : '' : ''}</Text>
-          </View>
+          </Card>
         )
       }) : <Text></Text>}
       <Button type='outline' title='Checkout' onPress={() => navigation.navigate('Checkout')}></Button>

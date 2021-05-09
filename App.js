@@ -16,6 +16,7 @@ import Home from './pages/Home'
 import Splash from './pages/Splash'
 import Checkout from './pages/Checkout'
 import Cart from './pages/Cart'
+import Payment from './pages/Payment'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as ContextProvider } from './context/Context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -56,6 +57,7 @@ const App = () => {
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Checkout" component={Checkout} />
                 <Stack.Screen name="Cart" component={Cart} />
+                <Stack.Screen name="Payment" component={Payment} />
               </Stack.Navigator>
             </NavigationContainer>
           </SafeAreaProvider>
@@ -70,6 +72,7 @@ const App = () => {
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Checkout" component={Checkout} />
+                <Stack.Screen name="Payment" component={Payment} />
               </Stack.Navigator>
 
             </NavigationContainer>
